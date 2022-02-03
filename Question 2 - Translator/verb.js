@@ -19,6 +19,7 @@ const verbs = [{
 
 const persons = ["1st", "2nd", "3rd", "4th", "5th", "6th"]
 
+
 const verifyDuplicates = (verifiedWords, wordObject) => {
     const duplicateIndex = verifiedWords.findIndex((object) => {
         return object.word === wordObject.word;
@@ -31,6 +32,21 @@ const verifyDuplicates = (verifiedWords, wordObject) => {
         return true;
     }
     return false
+}
+
+const discoverVerbName = (word) => {
+    let indexLastConsonant = 0;
+
+    for(let i = (word.length - 2); i >= 0; i--){
+        const isVowel = /^[aeiou]$/i.test(word[i])
+    
+        if(!isVowel){
+            indexLastConsonant = i;
+            break;
+        }
+    }
+
+    return word.slice(0, indexLastConsonant + 1) + "en"
 }
 
 const verifyWords = () => {
@@ -48,6 +64,7 @@ const verifyWords = () => {
                 const wordObject = {
                     word: word,
                     isAVerb: true,
+                    verbName: discoverVerbName(word),
                     tense: verb.tense,
                     tenseIndex: tenseIndex,
                     person: personIndex,
@@ -66,8 +83,8 @@ const verifyWords = () => {
                 isAVerb: false,
             })
         }
-
     });
+    console.log(verifiedWords)
 };
 
 verifyWords(wordsArray);
