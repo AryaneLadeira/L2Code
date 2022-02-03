@@ -1,0 +1,15 @@
+{
+  "name": "question-2-translator",
+  "version": "1.0.0",
+  "description": "Tradutor da linguagem utilizada por uma tribo encontrada na floresta Amazônica.",
+  "main": "verb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u0016https://github.com/AryaneLadeira/L2Code.git"
+  },
+  "author": "Aryane Ladeira da Silva",
+  "license": "ISC"
+}
