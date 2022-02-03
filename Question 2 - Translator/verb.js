@@ -19,6 +19,20 @@ const verbs = [{
 
 const persons = ["1st", "2nd", "3rd", "4th", "5th", "6th"]
 
+const verifyDuplicates = (verifiedWords, wordObject) => {
+    const duplicateIndex = verifiedWords.findIndex((object) => {
+        return object.word === wordObject.word;
+    })
+
+    if(duplicateIndex !== -1){
+        if (wordObject.ending.length > verifiedWords[duplicateIndex].ending.length){
+            verifiedWords[duplicateIndex] = wordObject;
+        }
+        return true;
+    }
+    return false
+}
+
 const verifyWords = () => {
     const verifiedWords = [];
 
@@ -40,16 +54,7 @@ const verifyWords = () => {
                     ending: verbs[tenseIndex].persons[personIndex]
                 }
 
-                const duplicateIndex = verifiedWords.findIndex((object) => {
-                    return object.word === word;
-                })
-
-                if(duplicateIndex !== -1){
-
-                    if (wordObject.ending.length > verifiedWords[duplicateIndex].ending.length)
-                        verifiedWords[duplicateIndex] = wordObject;
-    
-                }else{
+                if(!verifyDuplicates(verifiedWords, wordObject, word)){
                     verifiedWords.push(wordObject)
                 }
             }
