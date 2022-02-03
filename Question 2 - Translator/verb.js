@@ -19,6 +19,21 @@ const verbs = [{
 
 const persons = ["1st", "2nd", "3rd", "4th", "5th", "6th"]
 
+const discoverVerbName = (word) => {
+    let indexLastConsonant = 0;
+
+    for(let i = (word.length - 2); i >= 0; i--){
+        const isVowel = /^[aeiou]$/i.test(word[i])
+    
+        if(!isVowel){
+            indexLastConsonant = i;
+            break;
+        }
+    }
+
+    return word.slice(0, indexLastConsonant + 1) + "en"
+}
+
 
 const verifyDuplicates = (verifiedWords, wordObject) => {
     const duplicateIndex = verifiedWords.findIndex((object) => {
@@ -34,19 +49,18 @@ const verifyDuplicates = (verifiedWords, wordObject) => {
     return false
 }
 
-const discoverVerbName = (word) => {
-    let indexLastConsonant = 0;
+const structureFileAndSave = (verifiedWordsObjects) => {
+    const verifiedWordsArray = verifiedWordsObjects.map((wordObject) => {
+        return wordObject.isAVerb === true ?
+        `${wordObject.word} - ${wordObject.verbName}, ${wordObject.tense} tense, ${persons[wordObject.person]} person`
+        :
+        `${wordObject.word} - not a verb case`
+    })
 
-    for(let i = (word.length - 2); i >= 0; i--){
-        const isVowel = /^[aeiou]$/i.test(word[i])
-    
-        if(!isVowel){
-            indexLastConsonant = i;
-            break;
-        }
-    }
+    const verifiedWordsString = verifiedWordsArray.join("\n");
+    console.log(verifiedWordsString)
 
-    return word.slice(0, indexLastConsonant + 1) + "en"
+    fs.writeFileSync('verb.out.txt', verifiedWordsString);
 }
 
 const verifyWords = () => {
@@ -84,7 +98,7 @@ const verifyWords = () => {
             })
         }
     });
-    console.log(verifiedWords)
+    structureFileAndSave(verifiedWords)
 };
 
 verifyWords(wordsArray);
