@@ -1,0 +1,19 @@
+{
+  "name": "question-3-algoc",
+  "version": "1.0.0",
+  "description": "Uma linguagem para gerar apenas constantes.",
+  "main": "algoc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AryaneLadeira/L2Code.git"
+  },
+  "author": "Aryane Ladeira da Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AryaneLadeira/L2Code/issues"
+  },
+  "homepage": "https://github.com/AryaneLadeira/L2Code#readme"
+}
