@@ -50,8 +50,7 @@ const verifyDuplicates = (verifiedWords, wordObject) => {
 const structureFileAndSave = (verifiedWordsObjects) => {
   const verifiedWordsArray = verifiedWordsObjects.map((wordObject) => {
     return wordObject.isAVerb === true ? 
-    `${wordObject.word} - ${wordObject.verbName}, ${wordObject.tense} tense, 
-    ${persons[wordObject.person]} person`
+    `${wordObject.word} - ${wordObject.verbName}, ${wordObject.tense} tense, ${persons[wordObject.person]} person`
       : `${wordObject.word} - not a verb case`;
   });
 
