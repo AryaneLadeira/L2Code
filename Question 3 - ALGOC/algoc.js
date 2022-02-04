@@ -32,8 +32,24 @@ const isPositive = (constantCreated) => {
     response = inc(constantCreated.actualConstant)
 }
 
+const structureFileAndSave = (verifiedConstantsObjects) => {
+    const verifiedConstantsArray = verifiedConstantsObjects.map((constantObject) => {
+        const instructionsString = constantObject.instructions.join("\n");
+      return `Constant ${constantObject.constant}\n${instructionsString}\n`
+    });
+  
+    const verifiedConstantsString = verifiedConstantsArray.join("\n");
+  
+    fs.writeFileSync("algoc.out.txt", verifiedConstantsString);
+  
+    console.log("-------------------------");
+    console.log("Melhor lista de instruções criada para cada constante, verifique o arquivo algoc.out.txt :)");
+  };
+
 const verifyConstant = () => {
-    const constantsVerifieds = [];
+    console.log("Lendo a lista de constantes...");
+    
+    const verifiedsConstants = [];
     for(let i = 0; i < constantsArray.length; i++){
         if(constantsArray[i] === 0){
             break
@@ -68,12 +84,11 @@ const verifyConstant = () => {
                 constantCreated.instructions.push(response.instruction)
             }
 
-            constantsVerifieds.push(constantCreated)
+            verifiedsConstants.push(constantCreated)
         }
 
     }
-
-    console.log(constantsVerifieds)
+    structureFileAndSave(verifiedsConstants);
 }
 
 verifyConstant();
