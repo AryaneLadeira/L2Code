@@ -14,6 +14,24 @@ const dup = (constant) => {
     return {constant: constant * 2, instruction: "DUP"}
 }
 
+const isNegative = (constantCreated) => {
+    if(constantCreated.actualConstant - 1 === constantCreated.constant){
+        return inc(constantCreated.actualConstant)
+    }else{
+        return(constantCreated.actualConstant + 1 > constantCreated.constant)?
+            dup(constantCreated.actualConstant)
+        :
+            inc(constantCreated.actualConstant)
+    }
+}
+
+const isPositive = (constantCreated) => {
+    return ((constantCreated.actualConstant === 1 || constantCreated.actualConstant % 2 !== 0) && constantCreated.actualConstant * 2 <= constantCreated.constant)?
+    response = dup(constantCreated.actualConstant)
+        :
+    response = inc(constantCreated.actualConstant)
+}
+
 const verifyConstant = () => {
     const constantsVerifieds = [];
     for(let i = 0; i < constantsArray.length; i++){
@@ -41,21 +59,11 @@ const verifyConstant = () => {
 
                 let response;
 
-                if(constantCreated.actualConstant < 0){
-                    if(constantCreated.actualConstant - 1 === constantCreated.constant){
-                        response = inc(constantCreated.actualConstant)
-                    }else{
-                        (constantCreated.actualConstant + 1 > constantCreated.constant)?
-                            response = dup(constantCreated.actualConstant)
-                        :
-                        response = inc(constantCreated.actualConstant)
-                    }
-                }else{
-                    ((constantCreated.actualConstant === 1 || constantCreated.actualConstant % 2 !== 0) && constantCreated.actualConstant * 2 <= constantCreated.constant)?
-                        response = dup(constantCreated.actualConstant)
-                    :
-                        response = inc(constantCreated.actualConstant)
-                }
+                (constantCreated.actualConstant < 0)?
+                    response = isNegative(constantCreated)
+                :
+                    response = isPositive(constantCreated);
+                
                 constantCreated.actualConstant = response.constant;
                 constantCreated.instructions.push(response.instruction)
             }
